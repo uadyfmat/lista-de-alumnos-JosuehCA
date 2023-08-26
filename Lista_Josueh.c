@@ -32,11 +32,15 @@ int main(){
     alumnoptr alumno4 = crearAlumno("Andrea", 40, 2);
     alumnoptr alumno5 = crearAlumno("Mariano", 38, 9);
 
+    puts("");
+
     insertarNodoOrdenadoCreditos(&cabecera, crearNodo(alumno1));
     insertarNodoOrdenadoCreditos(&cabecera, crearNodo(alumno2));
     insertarNodoOrdenadoCreditos(&cabecera, crearNodo(alumno3));
     insertarNodoOrdenadoCreditos(&cabecera, crearNodo(alumno4));
     insertarNodoOrdenadoCreditos(&cabecera, crearNodo(alumno5));
+
+    puts("");
 
     imprimirLista(&cabecera);
 
@@ -51,6 +55,8 @@ alumnoptr crearAlumno(char* NombreCompleto, int creditos_aprobados, int semestre
     nuevo -> creditos_aprobados = creditos_aprobados;
     nuevo -> semestre = semestre;
 
+    printf("Se ha creado una estructura Alumno en la dirección %p\n", nuevo);
+
     return nuevo;
 };
 
@@ -60,6 +66,8 @@ nodoptr crearNodo(alumnoptr alumno){
     nuevo = (nodoptr)malloc(sizeof(nodo));
     nuevo -> alumno = alumno;
     nuevo -> enlace = NULL;
+
+    printf("Se ha creado un nodo en la lista de Alumnos en %p\n", nuevo);
 
     return nuevo;
 };
@@ -91,18 +99,18 @@ void insertarNodoOrdenadoCreditos(nodoptr* cabecera, nodoptr nuevo){
 void imprimirAlumno(alumnoptr alumno){
     printf("Nombre completo: %s\n", alumno -> NombreCompleto);
     printf("Créditos aprobados: %d\n", alumno -> creditos_aprobados);
-    printf("Semestre: %d\n", alumno -> semestre);
+    printf("Semestre: %d\n\n", alumno -> semestre);
 };
 
 void imprimirLista(nodoptr* cabecera){
     nodoptr actual = *cabecera;
 
     if(actual == NULL){
-        printf("Lista de alumnos vacía.\n");
+        printf("Lista de alumnos vacía.\n\n");
     }
     else {
+        printf("Lista de alumnos:\n\n");
         while(actual != NULL){
-            printf("Lista de alumnos:\n");
             imprimirAlumno(actual -> alumno);
             actual = actual -> enlace;
         }
